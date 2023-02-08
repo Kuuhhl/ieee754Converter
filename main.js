@@ -14,6 +14,10 @@ function int_to_bin(num) {
 function frac_to_bin(num, limit) {
 	console.log('Convert ' + num + ' to decimal:')
 	res = ''
+	if (num == 0) {
+		console.log('0.0 is 0 in binary.')
+		return '0'
+	}
 	for (i = -1; i >= -limit && num != 0; i--) {
 		console.log(num + ' / 2^(' + i + ') = ' + num / 2 ** i)
 		if (num / 2 ** i >= 1) {
@@ -70,11 +74,14 @@ function toBin(number) {
 			exponent +
 			'.'
 	)
+	console.log('Convert Exponent to binary:\n')
+	exponent = int_to_bin(exponent)
+
 	console.log(
-		'-> Exponent (filled up with 0-s): ' +
+		'\n-> Exponent (filled up with 0-s): ' +
 			exponent.toString().padEnd(8, '0')
 	)
-	mantissa = before_comma_bin + afterCommaBin.slice(1)
+	mantissa = (before_comma_bin + afterCommaBin).slice(1)
 	console.log(
 		'Our Mantissa is just the numbers after the point, after we moved our point to the left:\n-> Mantissa (filled up with 0-s): ' +
 			mantissa.toString().padEnd(23, '0')
@@ -91,4 +98,6 @@ function toBin(number) {
 	return
 }
 
-toBin('-9.25')
+res = '1000.625'
+console.log('Convert ' + res + ' to IEE-754:\n')
+toBin(res)
