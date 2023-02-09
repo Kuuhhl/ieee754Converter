@@ -47,6 +47,7 @@ function toBin(number) {
 		sign = '0'
 		stepDescription = 'Sign will be 0, as the number is positive.'
 	}
+	// add step 1 to array
 	steps.push(stepDescription)
 
 	// step 2: convert number before comma to binary
@@ -57,15 +58,28 @@ function toBin(number) {
 	stepDescription += '\n' + before_comma_bin.text
 	before_comma_bin = before_comma_bin.result
 
+	// add step 2 to array
 	steps.push(stepDescription)
 
 	// step 3: convert number after comma to binary
 	let afterComma = number.split('.')[1]
 	stepDescription = 'Convert number after comma to binary:\n'
-	afterCommaBin = frac_to_bin('0.' + afterComma, 23 - before_comma_bin.length)
-	stepDescription += afterCommaBin.text
-	afterCommaBin = afterCommaBin.result
 
+	// only convert if we have decimal places after the dot
+	if (number % 1 != 0) {
+		afterCommaBin = frac_to_bin(
+			'0.' + afterComma,
+			23 - before_comma_bin.length
+		)
+		stepDescription += afterCommaBin.text
+		afterCommaBin = afterCommaBin.result
+	} else {
+		stepDescription +=
+			'Because the input is a whole number, the result is 0.'
+		afterCommaBin = '0'
+	}
+
+	// add step 3 to array
 	steps.push(stepDescription)
 
 	// step 4: calculate exponent
@@ -81,9 +95,10 @@ function toBin(number) {
 		'As the Exponent is represented in Excess-127, we have to add 127:\n' +
 		(before_comma_bin.length - 1) +
 		' + 127 = ' +
-		before_comma_bin.length +
-		126 +
+		(before_comma_bin.length + 126) +
 		'.\n'
+
+	// add step 4 to array
 	steps.push(stepDescription)
 
 	// step 5: convert exponent to binary
@@ -95,6 +110,8 @@ function toBin(number) {
 	stepDescription +=
 		'\n-> Exponent (filled up with 0-s): ' +
 		exponentBin.toString().padStart(8, '0')
+
+	// add step 6 to array
 	steps.push(stepDescription)
 
 	// step 6: get mantissa
@@ -111,7 +128,10 @@ function toBin(number) {
 		mantissa.toString().padEnd(23, '0')
 
 	stepDescription += 'This means, our final result is: ' + result
+
+	// add step 6 to array
 	steps.push(stepDescription)
+
 	return { result: result, steps: steps }
 }
 
@@ -119,7 +139,7 @@ function conv() {
 	// get input number from form
 	userInput = document.getElementById('srcNumber')
 
-	// test if input is valid
+	// test if input is number
 	if (!userInput.value.toString().match(/^-{0,1}\d+(\.\d+){0,1}$/)) {
 		alert('Bad input!')
 		userInput.value = ''
@@ -130,7 +150,6 @@ function conv() {
 	solutionDiv.innerHTML = ''
 
 	stepsToConvert = toBin(userInput.value)
-	console.log(stepsToConvert)
 
 	solutionList = document.createElement('ol')
 
