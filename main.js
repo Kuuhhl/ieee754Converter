@@ -1,5 +1,12 @@
 function int_to_bin(num) {
 	text_result = 'Convert ' + num + ' to decimal:\n'
+
+	// handle 0 as input
+	if (num == 0) {
+		text_result += '0 is 0 in binary.'
+		return { result: '0', text: text_result }
+	}
+
 	tmp = num
 	res = ''
 	while (tmp != 0) {
@@ -15,6 +22,8 @@ function int_to_bin(num) {
 function frac_to_bin(num, limit) {
 	text_result = 'Convert ' + num + ' to decimal:\n'
 	res = ''
+
+	// handle 0 as input
 	if (num == 0) {
 		text_result += '0.0 is 0 in binary.'
 		return { result: '0', text: text_result }
