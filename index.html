@@ -2,12 +2,14 @@
 <html>
 	<head>
 		<title>Convert to IEE-754</title>
+		<link rel="stylesheet" href="styles.css" />
 	</head>
 	<body>
 		<header>IEE-754 Converter</header>
-		<span>Put in your number: </span
-		><input type="text" id="srcNumber" /><br />
-		<button onclick="conv()">Submit</button>
+		<span id="prompt">Put in your number: </span><br />
+		<input type="text" id="srcNumber" /><br />
+		<br />
+		<button id="submit" onclick="conv()">Submit</button>
 		<div id="solution"></div>
 		<script src="main.js"></script>
 	</body>
