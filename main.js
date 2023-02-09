@@ -94,7 +94,7 @@ function toBin(number) {
 
 	stepDescription +=
 		'\n-> Exponent (filled up with 0-s): ' +
-		exponentBin.toString().padEnd(8, '0')
+		exponentBin.toString().padStart(8, '0')
 	steps.push(stepDescription)
 
 	// step 6: get mantissa
@@ -106,7 +106,7 @@ function toBin(number) {
 	result =
 		sign +
 		' ' +
-		exponentBin.toString().padEnd(8, '0') +
+		exponentBin.toString().padStart(8, '0') +
 		' ' +
 		mantissa.toString().padEnd(23, '0')
 
